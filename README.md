@@ -17,12 +17,15 @@ Cada pasta é uma parte do projeto, disponível para conferencia:
 
 ## Objetivo
 
-Praticar conceito de criação de jogos, obter , incluindo:
+Praticar conceito de criação de jogos, obter o Know-How, incluindo:
 
+- Criação de personagens
+- Level design
+- Storytelling
+- Dublagem
 
+## Tecnologias e ferramentas (até o momento)
 
-## Tecnologias e ferramentas
-
-- 
-- 
-- 
+- Piskel
+- Construct 3
+- Word (One-Sheet)
