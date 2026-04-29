@@ -1,0 +1,132 @@
+🧰 1. INSTALAR AS FERRAMENTAS
+🔹 1.1 Instalar Git
+
+👉 Abre o navegador
+👉 Pesquisa: Git download
+👉 Entra no site oficial
+👉 Clica em Download for Windows
+👉 Vai clicando em Next → Next → Install
+
+✔ Final: fecha tudo
+
+🔹 1.2 Instalar CMake
+
+👉 Baixa do site oficial
+👉 Durante instalação:
+
+⚠️ IMPORTANTE
+Marca:
+✔ “Add CMake to system PATH”
+
+👉 Next → Install
+
+🔹 1.3 Instalar Visual Studio
+
+👉 Baixa o instalador (Visual Studio Community)
+
+Quando abrir:
+
+👉 Tela com vários quadradinhos (workloads)
+
+✔ Marca:
+👉 Desktop development with C++
+
+👉 Clica em Install
+
+💡 Isso instala o compilador C++ — sem isso nada funciona
+
+📥 2. BAIXAR O CÓDIGO
+
+👉 Abre o menu iniciar
+👉 Digita: cmd
+👉 Enter
+
+Agora no terminal:
+
+git clone --recursive https://github.com/aseprite/aseprite.git
+
+👉 Aperta Enter
+👉 Espera baixar
+
+Depois:
+
+cd aseprite
+📦 3. BAIXAR O SKIA (parte crítica)
+
+👉 Abre navegador
+👉 Pesquisa:
+aseprite skia download
+
+👉 Entra no link oficial do GitHub (release de Skia)
+
+Baixa versão tipo:
+👉 Skia-Windows-Release-x64.zip
+
+📁 Agora faz isso:
+
+👉 Abre o ZIP
+👉 Extrai para:
+
+C:\deps\skia
+
+💡 Se não existir a pasta “deps”, cria ela
+
+⚙️ 4. CONFIGURAR O BUILD
+
+Volta no terminal:
+
+mkdir build
+cd build
+
+Agora o comando grande (copia e cola):
+
+cmake -DCMAKE_BUILD_TYPE=Release ^
+-DLAF_BACKEND=skia ^
+-DSKIA_DIR=C:\deps\skia ^
+-DSKIA_LIBRARY_DIR=C:\deps\skia\out\Release-x64 ^
+-DSKIA_LIBRARY=C:\deps\skia\out\Release-x64\skia.lib ^
+-G "Visual Studio 17 2022" ..
+
+👉 Enter
+
+💡 Se aparecer um monte de texto e terminar sem erro → sucesso
+
+🔨 5. COMPILAR
+
+Agora:
+
+cmake --build . --config Release
+
+👉 Enter
+👉 Espera (pode demorar alguns minutos)
+
+▶️ 6. ABRIR O ASEPRITE
+
+👉 Abre o explorador de arquivos
+👉 Vai em:
+
+aseprite\build\bin
+
+👉 Procura:
+
+aseprite.exe
+
+👉 Dá dois cliques
+
+🎉 BOOM — abriu = missão cumprida
+
+⚠️ SE DER ERRO (atalho rápido)
+❌ Erro de C++:
+
+→ volta no Visual Studio e vê se marcou:
+✔ Desktop development with C++
+
+❌ Skia não encontrado:
+
+→ caminho errado em:
+
+C:\deps\skia
+❌ Comando não reconhecido:
+
+→ CMake ou Git não estão no PATH
+
