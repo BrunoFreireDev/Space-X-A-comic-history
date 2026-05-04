@@ -1,0 +1,1030 @@
+{
+	"name": "Event sheet 1",
+	"events": [
+		{
+			"eventType": "comment",
+			"text": "Player configurations:"
+		},
+		{
+			"eventType": "comment",
+			"text": "The height of player, simple / A altura do jogador"
+		},
+		{
+			"eventType": "variable",
+			"name": "playerHeight",
+			"type": "number",
+			"initialValue": "45",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 321175236785752
+		},
+		{
+			"eventType": "comment",
+			"text": "Velocity of player walk / Velocidade do caminhar"
+		},
+		{
+			"eventType": "variable",
+			"name": "playerSpeed",
+			"type": "number",
+			"initialValue": "200",
+			"comment": "Walk speed of player",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 365248326053834
+		},
+		{
+			"eventType": "comment",
+			"text": "Velocity of player running (PlayerSpeed*PlayerRun) / Velocidade de corrida"
+		},
+		{
+			"eventType": "variable",
+			"name": "PlayerRun",
+			"type": "number",
+			"initialValue": "5",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 370883823210182
+		},
+		{
+			"eventType": "comment",
+			"text": "Camera configurations:"
+		},
+		{
+			"eventType": "variable",
+			"name": "camHeight",
+			"type": "number",
+			"initialValue": "50",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 405615127451592
+		},
+		{
+			"eventType": "variable",
+			"name": "camSensitivity",
+			"type": "number",
+			"initialValue": "15",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 821441703065524
+		},
+		{
+			"eventType": "variable",
+			"name": "camX",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 609551365651145
+		},
+		{
+			"eventType": "variable",
+			"name": "camY",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 980833225342632
+		},
+		{
+			"eventType": "comment",
+			"text": "Mouse sensitive / Sensibilidade do mouse"
+		},
+		{
+			"eventType": "variable",
+			"name": "mouseSense",
+			"type": "number",
+			"initialValue": "25",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 198130276832921
+		},
+		{
+			"eventType": "comment",
+			"text": "Gravity configurations:"
+		},
+		{
+			"eventType": "variable",
+			"name": "dz",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 982060078760657
+		},
+		{
+			"eventType": "comment",
+			"text": "This config is a velocity of player return to ground / Define a velocidade de retorno ao chão"
+		},
+		{
+			"eventType": "variable",
+			"name": "Gravity",
+			"type": "number",
+			"initialValue": "5",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 595499308318076
+		},
+		{
+			"eventType": "comment",
+			"text": "I do now, but is necessarie / Eu não sei exatamente, mas é importante"
+		},
+		{
+			"eventType": "variable",
+			"name": "onGround",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 985569043781034
+		},
+		{
+			"eventType": "comment",
+			"text": "Force of player jump / Força de pulo do jogador"
+		},
+		{
+			"eventType": "variable",
+			"name": "jumpStrength",
+			"type": "number",
+			"initialValue": "1.5",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 724952337683247
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "3D cam",
+			"description": "Enable this group to see the game from a first-person perspective.",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "The piggy object's back faces are visible in the editor only to make them easier to select. We only want to see the right faces in first-person mode, so hide the back faces on startup."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 612285574173979
+						}
+					],
+					"actions": [
+						{
+							"id": "look-parallel-to-layout",
+							"objectClass": "3DCamera",
+							"sid": 730623574724525,
+							"parameters": {
+								"cam-x": "Player.X",
+								"cam-y": "Player.Y",
+								"cam-z": "Player.Zelevation+playerHeight",
+								"look-angle": "Player.Angle"
+							}
+						}
+					],
+					"sid": 932610097702570
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 106626006440412
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position",
+							"objectClass": "3DCamera",
+							"sid": 635809090938304,
+							"parameters": {
+								"x": "Player.X",
+								"y": "Player.Y",
+								"z": "Player.Zelevation+playerHeight",
+								"which": "camera"
+							}
+						}
+					],
+					"sid": 166072705958095
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-movement",
+							"objectClass": "Mouse",
+							"sid": 615835430288462
+						}
+					],
+					"actions": [
+						{
+							"id": "rotate-camera",
+							"objectClass": "3DCamera",
+							"sid": 957439125648373,
+							"parameters": {
+								"rotate-x": "Mouse.MovementX / mouseSense",
+								"rotate-y": "Mouse.Movementy / mouseSense",
+								"min-polar-angle": "20",
+								"max-polar-angle": "160"
+							}
+						}
+					],
+					"sid": 146024966777581
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-movement",
+							"objectClass": "Mouse",
+							"sid": 608241126386265
+						}
+					],
+					"actions": [
+						{
+							"id": "request-pointer-lock",
+							"objectClass": "Mouse",
+							"sid": 207964378546059,
+							"parameters": {
+								"unadjusted-movement": false
+							}
+						}
+					],
+					"sid": 764981474466365
+				}
+			],
+			"sid": 921861971621995
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Moviment",
+			"description": "Controls for game",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Simple moviments for the player"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 643132814315370,
+							"parameters": {
+								"key": 87
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 166803526402506,
+							"parameters": {
+								"key": 38
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-at-angle",
+							"objectClass": "Player",
+							"sid": 159128766364871,
+							"parameters": {
+								"angle": "3DCamera.CameraXRotation",
+								"distance": "playerSpeed*dt"
+							}
+						},
+						{
+							"id": "push-out-solid-at-angle",
+							"objectClass": "Player",
+							"sid": 411404873272812,
+							"behaviorType": "Personalizado",
+							"parameters": {
+								"angle": "3DCamera.CameraXrotation+180"
+							}
+						}
+					],
+					"sid": 884424201875736,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 205910127156639,
+							"parameters": {
+								"key": 65
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 949660329042998,
+							"parameters": {
+								"key": 37
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-at-angle",
+							"objectClass": "Player",
+							"sid": 578529171835604,
+							"parameters": {
+								"angle": "3DCamera.CameraXRotation-90",
+								"distance": "playerSpeed*dt"
+							}
+						},
+						{
+							"id": "push-out-solid-at-angle",
+							"objectClass": "Player",
+							"sid": 717493491572778,
+							"behaviorType": "Personalizado",
+							"parameters": {
+								"angle": "3DCamera.CameraXrotation+90"
+							}
+						}
+					],
+					"sid": 646075674407234,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 626667881305153,
+							"parameters": {
+								"key": 68
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 575170388125313,
+							"parameters": {
+								"key": 39
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-at-angle",
+							"objectClass": "Player",
+							"sid": 259873994125004,
+							"parameters": {
+								"angle": "3DCamera.CameraXRotation+90",
+								"distance": "playerSpeed*dt"
+							}
+						},
+						{
+							"id": "push-out-solid-at-angle",
+							"objectClass": "Player",
+							"sid": 287191932393185,
+							"behaviorType": "Personalizado",
+							"parameters": {
+								"angle": "3DCamera.CameraXrotation-90"
+							}
+						}
+					],
+					"sid": 294641587561871,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 226132967983666,
+							"parameters": {
+								"key": 83
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 897466167975342,
+							"parameters": {
+								"key": 40
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-at-angle",
+							"objectClass": "Player",
+							"sid": 899218206008066,
+							"parameters": {
+								"angle": "3DCamera.CameraXRotation",
+								"distance": "-playerSpeed*dt"
+							}
+						},
+						{
+							"id": "push-out-solid-at-angle",
+							"objectClass": "Player",
+							"sid": 661879734331057,
+							"behaviorType": "Personalizado",
+							"parameters": {
+								"angle": "3DCamera.CameraXrotation"
+							}
+						}
+					],
+					"sid": 113473073160822,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "comment",
+					"text": "Run botton and configurations"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 546988626409707,
+							"parameters": {
+								"key": 16
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-at-angle",
+							"objectClass": "Player",
+							"sid": 310390007523914,
+							"parameters": {
+								"angle": "3DCamera.CameraXRotation",
+								"distance": "PlayerRun"
+							}
+						}
+					],
+					"sid": 641596036467103
+				},
+				{
+					"eventType": "comment",
+					"text": "Jump botton and configurations"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 325642322546875,
+							"parameters": {
+								"key": 32
+							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 538569602119804,
+							"parameters": {
+								"variable": "onGround"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 710174189539194,
+							"parameters": {
+								"variable": "dz",
+								"value": "jumpStrength"
+							}
+						},
+						{
+							"id": "set-z-elevation",
+							"objectClass": "Player",
+							"sid": 928019247122645,
+							"parameters": {
+								"z": "Player.zelevation"
+							}
+						}
+					],
+					"sid": 313338833861806
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 984828342551693
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "Bloco",
+							"sid": 312084276157765,
+							"behaviorType": "Solid",
+							"parameters": {
+								"state": "disabled"
+							}
+						}
+					],
+					"sid": 798811322834202
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-z-elevation",
+							"objectClass": "Bloco",
+							"sid": 385699764402307,
+							"parameters": {
+								"which": "z-elevation",
+								"comparison": 4,
+								"z-elevation": "Player.Zelevation-Self.zheight+1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "Bloco",
+							"sid": 560039043860049,
+							"behaviorType": "Solid",
+							"parameters": {
+								"state": "enabled"
+							}
+						}
+					],
+					"sid": 806731195721969
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-z-elevation",
+							"objectClass": "Bloco",
+							"sid": 351260307684774,
+							"parameters": {
+								"which": "z-elevation",
+								"comparison": 2,
+								"z-elevation": "Player.zelevation+playerHeight"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 474622406814524
+				},
+				{
+					"eventType": "comment",
+					"text": "Gravity configurations"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 820821740780582
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-eventvar",
+							"objectClass": "System",
+							"sid": 501701960535122,
+							"parameters": {
+								"variable": "dz",
+								"value": "Gravity*dt"
+							}
+						},
+						{
+							"id": "set-z-elevation",
+							"objectClass": "Player",
+							"sid": 929355954015278,
+							"parameters": {
+								"z": "Player.zelevation + dz"
+							}
+						}
+					],
+					"sid": 981593962646937
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 341614186790196,
+							"parameters": {
+								"first-value": "dz",
+								"comparison": 2,
+								"second-value": "0"
+							}
+						},
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "Player",
+							"sid": 705996778388791,
+							"parameters": {
+								"object": "Bloco"
+							}
+						},
+						{
+							"id": "compare-z-elevation",
+							"objectClass": "Bloco",
+							"sid": 320212415345547,
+							"parameters": {
+								"which": "z-elevation",
+								"comparison": 3,
+								"z-elevation": "Player.zelevation+playerHeight-self.zheight"
+							}
+						},
+						{
+							"id": "compare-z-elevation",
+							"objectClass": "Bloco",
+							"sid": 470340907646286,
+							"parameters": {
+								"which": "z-elevation",
+								"comparison": 5,
+								"z-elevation": "Player.Z-Self.zHeight"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 299071203295169,
+							"parameters": {
+								"variable": "dz",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-z-elevation",
+							"objectClass": "Player",
+							"sid": 228557181620632,
+							"parameters": {
+								"z": "Bloco.Zelevation+Bloco.zheight"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 849527521919916,
+							"parameters": {
+								"variable": "onGround",
+								"value": "true"
+							}
+						}
+					],
+					"sid": 990185750722655
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 781213132210041
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 180131482376914,
+							"parameters": {
+								"variable": "onGround",
+								"value": "false"
+							}
+						}
+					],
+					"sid": 666841434342974
+				},
+				{
+					"eventType": "comment",
+					"text": "Fire botton and configurations"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-click",
+							"objectClass": "Mouse",
+							"sid": 893308721211948,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "clicked"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "spawn-another-object",
+							"objectClass": "cam_3D",
+							"sid": 112287106044101,
+							"parameters": {
+								"object": "Tomato",
+								"layer": "\"Billboards\"",
+								"image-point": "0",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"type": "comment",
+							"text": "Adjust the tomato angle by a small random amount so they spread out a little rather than form a perfectly straight line."
+						},
+						{
+							"id": "rotate-clockwise",
+							"objectClass": "Tomato",
+							"sid": 777590936200415,
+							"parameters": {
+								"degrees": "random(-1, 1)"
+							}
+						},
+						{
+							"id": "move-to-layer",
+							"objectClass": "Tomato",
+							"sid": 517431606824496,
+							"parameters": {
+								"layer": "Player.zelevation / 2"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "Tomato",
+							"sid": 664914908242133,
+							"parameters": {
+								"angle": "3DCamera.CameraXRotation"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "Tomato",
+							"sid": 146831955276642,
+							"parameters": {
+								"instance-variable": "zAxis",
+								"value": "3DCamera.CameraYRotation"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "Tomato",
+							"sid": 925602340650586,
+							"parameters": {
+								"instance-variable": "speed",
+								"value": "Tomato.Bullet.Speed"
+							}
+						}
+					],
+					"sid": 211664545702034
+				}
+			],
+			"sid": 615438135851416
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "General",
+			"description": "Event blocks that implement the gameplay regardless of the type of view.",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Always make the piggy objects look towards the player, for a billboard style appearance."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 854542785180894
+						}
+					],
+					"actions": [
+						{
+							"id": "set-angle-toward-position",
+							"objectClass": "robo_limpeza",
+							"sid": 564598956419341,
+							"parameters": {
+								"x": "Player.X",
+								"y": "Player.Y"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 787871504055852,
+							"parameters": {
+								"variable": "camX",
+								"value": "Mouse.MovementX"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 802920810982321,
+							"parameters": {
+								"variable": "camX",
+								"value": "Mouse.MovementY"
+							}
+						}
+					],
+					"sid": 157540471171941
+				},
+				{
+					"eventType": "comment",
+					"text": "Shoot tomatoes when pressing spacebar. Note the tomato is also a 3D shape using just the right face for a billboard style appearance. It is also Z elevated slightly so it comes out just below the player's viewpoint."
+				},
+				{
+					"eventType": "comment",
+					"text": "When a tomato collides with the scenery, destroy it. Note we only want tomatoes to collide with 3D shapes on the ground - they should ignore ones raised up with Z elevation, so you can still shoot tomatoes through the archway. Therefore also check that the 3D shape it collided with has a Z elevation of 0."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "Tomato",
+							"sid": 195625571078721,
+							"parameters": {
+								"object": "Bloco"
+							}
+						},
+						{
+							"id": "compare-z-elevation",
+							"objectClass": "Bloco",
+							"sid": 396141966150537,
+							"parameters": {
+								"which": "z-elevation",
+								"comparison": 0,
+								"z-elevation": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "Tomato",
+							"sid": 794118440864310
+						}
+					],
+					"sid": 230223098345747
+				},
+				{
+					"eventType": "comment",
+					"text": "When a tomato collides with a piggy, add to its hitcount, make it flash, and destroy the tomato."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "Tomato",
+							"sid": 353616374339340,
+							"parameters": {
+								"object": "robo_limpeza"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-instvar",
+							"objectClass": "robo_limpeza",
+							"sid": 964783261048000,
+							"parameters": {
+								"instance-variable": "HitCount",
+								"value": "1"
+							}
+						},
+						{
+							"id": "flash",
+							"objectClass": "robo_limpeza",
+							"sid": 791812377781330,
+							"behaviorType": "Flash",
+							"parameters": {
+								"on-time": "0.05",
+								"off-time": "0.05",
+								"duration": "0.4"
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "Tomato",
+							"sid": 488563244776270
+						}
+					],
+					"sid": 589471865026417
+				},
+				{
+					"eventType": "comment",
+					"text": "If a piggy gets hit by a tomato 5 times, destroy it and create a \"puff\" billboard in its place as a disappearing animation (the \"puff\" object has the Fade behavior so it fades out)."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "robo_limpeza",
+							"sid": 962712083526216,
+							"parameters": {
+								"instance-variable": "HitCount",
+								"comparison": 5,
+								"value": "5"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 147589082007140,
+							"parameters": {
+								"object-to-create": "PuffBillboard",
+								"layer": "\"Billboards\"",
+								"x": "robo_limpeza.X",
+								"y": "robo_limpeza.Y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "PuffBillboard",
+							"sid": 658256368332496,
+							"parameters": {
+								"angle": "robo_limpeza.Angle"
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "robo_limpeza",
+							"sid": 990243159931533
+						}
+					],
+					"sid": 418485216908289
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [],
+					"sid": 854743692102659
+				}
+			],
+			"sid": 174758099143302
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "CleanerRobot",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 236327619973970
+						}
+					],
+					"actions": [
+						{
+							"id": "set-face-visible",
+							"objectClass": "robo_limpeza",
+							"sid": 215703556701774,
+							"parameters": {
+								"face": "back",
+								"visible": false
+							}
+						}
+					],
+					"sid": 640534502009896
+				}
+			],
+			"sid": 510895906291283
+		}
+	],
+	"sid": 458750256928100
+}
